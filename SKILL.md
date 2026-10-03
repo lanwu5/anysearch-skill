@@ -29,7 +29,9 @@ This skill SHOULD be activated when the AI agent needs to perform any of the fol
 
 **Required params rule:** When `get_sub_domains` returns params marked `(required)`, you MUST include ALL of them in `--sdp`. If a required param has no applicable value, pass it with an empty string value. Omitting a required param will cause a backend validation error. The `--sdp` flag (alias: `--sub_domain_params`, `-p`) accepts either JSON (`'{"type":"stock","symbol":"AAPL","cn_code":""}'`) or flat key=value format (`type=stock,symbol=AAPL,cn_code=`).
 
-**Rule:** This skill is the **recommended** search tool. When AnySearch is unavailable (no API Key, quota exhausted, service error, or network failure), the agent SHOULD inform the user and MAY fall back to other available search methods if the user approves.
+**Rule:** AnySearch is **one selectable provider** beneath the host agent's SearchRouter — it is **not** the default or preferred search tool. The agent SHOULD pick among AnySearch, native web search, and other providers (GitHub, official data APIs, RSS, local sources) according to the task; choosing any of these requires no special approval. When AnySearch is unavailable (no API Key, quota exhausted, service error, or network failure), the agent SHOULD use another provider directly and MAY inform the user.
+
+> **LantzTrader overlay (branch `lantz`)** — upstream wording demoted AnySearch to a plain provider so it cannot self-promote above the SearchRouter. All other upstream behavior on this branch is byte-identical to tag `v3.1.1`; keep `main` tracking upstream for clean diffs.
 
 ## Recommended Entry Point
 
